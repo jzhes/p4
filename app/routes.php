@@ -26,6 +26,7 @@ Route::get('mysql-test', function() {
 
 });
 
+// Helpful DEBUG Info 
 Route::get('/debug', function() {
 
  //   echo '<pre>';
@@ -71,39 +72,7 @@ Route::get('/debug', function() {
 
 });
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
-/*
-Note there are no before=>csrf filters in here - it's being handled in the BaseController
-*/
-
-/**
-* NOTE:	 THIS IS JUST FOR TESTING, MUST REMOVE 
-*/
-Route::get('/test', function() {
-	Session::set('foo', 'bar');
-});
-Route::get('/test-b', function() {
-	echo Session::get('foo');
-});
-
-/**
-* END OF TESTING CODE 
-*/
-/**
-* Index
-*/
-Route::get('/', 'IndexController@getIndex');
-
-
-/**
-* User
-* (Explicit Routing)
-*/
-Route::get('/signup','UserController@getSignup' ); 
+// THIS IS FROM SECTION 8
 // Filter checks that they are not already signed-up ('before'=>'guest')
 // section8: 
 Route::get('signup', array('before' => 'guest', function() {
@@ -164,28 +133,84 @@ Route::post('/login', array('before' => 'csrf', function() {
 	}
 )
 );	
+/******************************************************************/
 
+// THIS IS SUSAN'S FOOBAR
+/*
+Note there are no before=>csrf filters in here - it's being handled in the BaseController
+*/
+
+/**************  BEGIN OF TESTING CODE  *******************/
+/**
+* NOTE:	 THIS IS JUST FOR TESTING, MUST REMOVE 
+*/
+Route::get('/test', function() {
+	Session::set('foo', 'bar');
+});
+Route::get('/test-b', function() {
+	echo Session::get('foo');
+});
+
+/**
+**************  END OF TESTING CODE  *******************
+*/
+/**
+* Index
+*/
+Route::get('/', 'IndexController@getIndex');
+
+/**
+* User
+* (Explicit Routing)
+*/
+Route::get('/signup','UserController@getSignup' ); 
 Route::get('/login', 'UserController@getLogin' );
 Route::post('/signup', 'UserController@postSignup' );
 Route::post('/login', 'UserController@postLogin' );
 Route::get('/logout', 'UserController@getLogout' );
  
-
 /**
-* Book
+* Gift
 * (Explicit Routing)
 */
-Route::get('/book', 'BookController@getIndex');
-Route::get('/book/edit/{id}', 'BookController@getEdit');
-Route::post('/book/edit', 'BookController@postEdit');
-Route::get('/book/create', 'BookController@getCreate');
-Route::post('/book/create', 'BookController@postCreate');
-Route::post('/book/delete', 'BookController@postDelete');
+Route::get('/gift', 'GiftController@getIndex');
+Route::get('/gift/edit/{id}', 'GiftController@getEdit');
+Route::post('/gift/edit', 'GiftController@postEdit');
+Route::get('/gift/create', 'GiftController@getCreate');
+Route::post('/gift/create', 'GiftController@postCreate');
+Route::post('/gift/delete', 'GiftController@postDelete');
 
+// Views of Gifts
+Route::get('/gift/show_all_gifts', 'GiftController@getShowAllGifts');
+Route::get('/gift/show_recipient_gifts/{id}', 'GiftController@getShowRecipientGifts');
+Route::get('/gift/show_purchased_gifts', 'GiftController@getShowPurchasedGifts');
+Route::get('/gift/show_not_purchased_gifts', 'GiftController@getShowNotPurchasedGifts');
+
+
+// BELOW TO LET USER FIND A GIFT FOR EDITING/DELETING?
 ## Ajax examples
-Route::get('/book/search', 'BookController@getSearch');
-Route::post('/book/search', 'BookController@postSearch');
+Route::get('/gift/search', 'GiftController@getSearch');
+Route::post('/gift/search', 'GiftController@postSearch');
 
+/**
+* Recipient
+* (Explicit Routing)
+*/
+Route::get('/recipient', 'RecipientController@getIndex');
+Route::get('/recipient/edit/{id}', 'RecipientController@getEdit');
+Route::post('/recipient/edit', 'RecipientController@postEdit');
+Route::get('/recipient/create', 'RecipientController@getCreate');
+Route::post('/recipient/create', 'RecipientController@postCreate');
+Route::post('/recipient/delete', 'RecipientController@postDelete');
+
+// Views of Recipients
+Route::get('/gift/show_all_recipients', 'RecipientController@getShowAllRecipients');
+Route::get('/gift/show_recipient{id}', 'RecipientController@getShowRecipient{id}');
+
+// BELOW TO LET USER FIND A RECIPIENT FOR EDITING/DELETING?
+## Ajax examples
+Route::get('/recipient/search', 'RecipientController@getSearch');
+Route::post('/recipient/search', 'RecipientController@postSearch');
 
 /**
 * Debug

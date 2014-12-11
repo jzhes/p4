@@ -7,8 +7,10 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		 "paste/pre": "dev-master",
-		 "barryvdh/laravel-debugbar": "1.8.*@dev"
 	},
+	"require-dev": {
+        "barryvdh/laravel-debugbar": "1.8.*@dev"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",

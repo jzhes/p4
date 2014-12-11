@@ -28,7 +28,6 @@ class CreateGiftsTable extends Migration {
 			$table->integer('price');
 			$table->integer('totalcost');
 			$table->boolean('purchased');
-			$table->boolean('online');
 			
 			# Define foreign keys...
 			$table->foreign('user_id')->references('id')->on('users');

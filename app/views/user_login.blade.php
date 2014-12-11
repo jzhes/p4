@@ -12,11 +12,11 @@
 
     {{ Form::label('email') }}
 	
-	{{-- She added sam@gmail.com below just to make it easier for testing --}}
-    {{ Form::text('email','sam@gmail.com') }}
+	{{-- REMOVE BELOW BEFORE FINAL --}}
+    {{ Form::text('email','test@test.com') }}
 
-	{{-- She added actual password "sam" below just to make it easier for testing --}}
-    {{ Form::label('password') }} (sam)
+	{{-- REMOVE BELOW BEFORE FINAL --}}
+    {{ Form::label('password') }} (testtest)
     {{ Form::password('password') }}
 
     {{ Form::submit('Submit') }}

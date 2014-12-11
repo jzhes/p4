@@ -5,6 +5,7 @@
 @stop
 
 @section('content')
+
 <h1>Sign up</h1>
 
 @foreach($errors->all() as $message)

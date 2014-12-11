@@ -21,10 +21,8 @@ class CreateRecipientsTable extends Migration {
 			$table->timestamps();
  
 			# General data...
-			$table->string('first_name');
-			$table->string('last_name');
-			$table->integer('categories_id')->unsigned(); # FK Must be UNSIGNED
-			$table->integer('statuses_id')->unsigned(); 
+			$table->integer('user_id')->unsigned(); # FK Must be UNSIGNED
+			$table->string('name');
 			
 			# Define foreign keys...
 			$table->foreign('categories_id')->references('id')->on('categories');
