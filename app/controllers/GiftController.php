@@ -15,75 +15,80 @@ class GiftController extends \BaseController {
 	}
 
 	/**
-	* Process the searchform
+	* Display all of the Gifts
 	* @return View
 	*/
-	public function getSearch() {
-
-		return View::make('gift_search');
-
-	}
-
-	/**
-	* Process the searchform
-	* @return View
-	*/
-	public function getShowAllGifts() {
+	public function getAllGifts() {
 	
 		$criteria = '';
 		$id = '';
 		$gifts = Gift::getData($criteria, $id);
+		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('total', $total)
 			->with('gifts', $gifts);
-
+		
 	}
 
-	public function getShowPurchasedGifts() {
+	/**
+	* Display a single Gift
+	* @return View
+	*/
+	public function getGift($id) {
+	
+		$criteria = '';
+		$gift = Gift::getData($criteria, $id)->first();
+		return View::make('gift_view')
+			->with('gift', $gift);
+		
+	}
+	
+	/**
+	* Display only those Gifts which have been purchased
+	* @return View
+	*/
+	public function getPurchasedGifts() {
 	
 		$criteria = 'P';
 		$id = '';
 		$gifts = Gift::getData($criteria, $id);
+		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('total', $total)
 			->with('gifts', $gifts);
 
 	}
 	
-	public function getShowNotPurchasedGifts() {
+	/**
+	* Display only those Gifts which have NOT been purchased
+	* @return View
+	*/
+	public function getNotPurchasedGifts() {
 	
 		$criteria = 'NP';
 		$id = '';
 		$gifts = Gift::getData($criteria, $id);
+		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('total', $total)
 			->with('gifts', $gifts);
-
 	}
 	
-	public function getShowRecipientGifts($id) {
+	/**
+	* Display only those Gifts for a specific Recipient
+	* @return View
+	*/
+	public function getRecipientGifts($id) {
 	
 		$criteria = 'R';
 		$gifts = Gift::getData($criteria, $id);
+		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('total', $total)
 			->with('gifts', $gifts);
 
 	}
 
-	/**
-	* Display all gifts
-	* @return View
-	*/
-	public function getIndex() {
-
-		$query  = Input::get('query');
-		$gifts = Gift::search($query);
-
-/*
-		$query = Gift::search('1');
-		$query = '1';
-*/	
-		return View::make('gift_index')
-			->with('gifts', $gifts)
-			->with('query', $query);
-	}
 
 	/**
 	* Show the "Add a gift form"
@@ -92,8 +97,7 @@ class GiftController extends \BaseController {
 	public function getCreate() {
 
 		$recipients = Recipient::getIdNamePair();
-
-    	return View::make('gift_add')->with('recipients',$recipients);
+    	return View::make('gift_add')->with('recipients', $recipients);
 
 	}
 
@@ -108,12 +112,7 @@ class GiftController extends \BaseController {
 
 		$gift->fill(Input::all());
 		$gift->user_id = Session::get('user_id');
-//SEE IF WORKS AND ADD TO POSTEDIT
 		$gift->total = $gift->qty * $gift->price;
-
-
-		
-/////SET OTHER DEFAULT VALUES FOR FIELDS, E.G., TOTAL COST???
 
 		# Magic: Eloquent
 		$gift->save();
@@ -155,11 +154,11 @@ class GiftController extends \BaseController {
 	        return Redirect::to('/gift')->with('flash_message', 'Gift not found');
 	    }
 
-	    # http://laravel.com/docs/4.2/eloquent#mass-assignment
 	    $gift->fill(Input::all());
+		$gift->total = $gift->qty * $gift->price;
 	    $gift->save();
 
-	   	return Redirect::action('GiftController@getIndex')->with('flash_message','Your changes have been saved.');
+	   	return Redirect::action('GiftController@getGift')->with('flash_message','Your changes have been saved.');
 
 	}
 
@@ -168,18 +167,36 @@ class GiftController extends \BaseController {
 	*
 	* @return Redirect
 	*/
+
 	public function postDelete() {
 
 		try {
 	        $gift = Gift::findOrFail(Input::get('id'));
 	    }
 	    catch(exception $e) {
-	        return Redirect::to('/gift/')->with('flash_message', 'Could not delete gift - not found.');
+	        return Redirect::to('/gift')->with('flash_message', 'Could not delete gift - not found.');
 	    }
 
 	    Gift::destroy(Input::get('id'));
 
-	    return Redirect::to('/gift/')->with('flash_message', 'Gift deleted.');
+	    return Redirect::to('/gift')->with('flash_message', 'Gift was deleted.');
+
+	}
+
+	/******************************************************/
+	/**
+	* Display all gifts
+	* @return View
+	*/
+	public function getIndex() {
+
+		$query  = Input::get('query');
+		$gifts = Gift::search($query);
+		$total = Gift::calcTotal($gifts);
+		return View::make('gift_index')
+			->with('total', $total)
+			->with('gifts', $gifts)
+			->with('query', $query);
 
 	}
 
@@ -192,7 +209,6 @@ class GiftController extends \BaseController {
 		if(Request::ajax()) {
 
 			$query  = Input::get('query');
-echo "BEFORE SEARCH";
 			# Do the actual query
 	        $gifts  = Gift::search($query);
 
@@ -208,5 +224,16 @@ echo "BEFORE SEARCH";
 			
 		}
 	}
+	
+	/**
+	* Process the searchform
+	* @return View
+	*/
 
+	public function getSearch() {
+
+		return View::make('gift_search');
+
+	}
+	
 }

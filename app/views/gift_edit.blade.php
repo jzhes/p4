@@ -23,10 +23,9 @@
 			{{ Form::text('item',$gift['item']); }}
 		</div>
 
-		{{-- SET DEFAULT VALUE TO ACTUAL VALUE OF GIFT, RIGHT NOW IT DEFAULTS TO FIRST RECIPIENT --}}
 		<div class='form-group'>
 			{{ Form::label('recipient_id', 'Recipient') }}
-			{{ Form::select('recipient_id', $recipients); }}
+			{{ Form::select('recipient_id', $recipients, $gift->recipient_id); }}
 		<div class='form-group'>
 
 		<div class='form-group'>
@@ -38,6 +37,9 @@
 			{{ Form::label('price','Price') }}
 			{{ Form::text('price',$gift['price']); }}
 		</div>
+{{-- FIX THE PURCHASED CHECKBOX BELOW --}}		
+{{-- Form::checkbox('tags[]', $id, $book->tags->contains($id)); }} {{ $tag }} --}} 
+{{-- Form::checkbox('purchased','yes', $gift['purchased']); --}}
 
 		<div class='form-group'>
 			{{ Form::label('purchased','Purchased') }}
@@ -47,14 +49,5 @@
 		{{ Form::submit('Save'); }}
 
 	{{ Form::close() }}
-
-	<div>
-		{{---- DELETE -----}}
-		{{ Form::open(array('url' => '/gift/delete')) }}
-			{{ Form::hidden('id',$gift['id']); }}
-			<button onClick='parentNode.submit();return false;'>Delete</button>
-		{{ Form::close() }}
-	</div>
-
 
 @stop

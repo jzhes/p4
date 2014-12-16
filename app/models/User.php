@@ -17,22 +17,37 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $table = 'users';
 
 	/**
-	 * The attributes excluded from the model's JSON form.
+	 * The attributes excluded from the model
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password', 'remember_token');
+	protected $hidden = array('password');
 	
-// NOT SURE ABOUT COMMENTED OUT CODE BELOW!!
+	/**
+	* Identify relation between Gift and User
+	*/
+	public function gift() {
 	
-/***	protected $guarded = array('id', 'created_at', 'updated_at'); 
-***/
+       # User may have many gifts
+       return $this->hasMany('Gift');
 
-/***
-public function book() {
-	# Author has many Books
-	return $this->hasMany('Book');
-}
-***/
+   }
+
+	/**
+	* Identify relation between Recipient and User
+	*/
+	public function recipient() {
+       
+	   # User may have many recipients
+       return $this->hasMany('Recipient');
+	   
+    }
+
 	
+	public static function getUser($email) {
+
+   		return User::where('email','=', $email)->first();
+
+    }
+
 }

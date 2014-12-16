@@ -17,17 +17,12 @@
     {{ Form::label('Email') }}
     {{ Form::text('email') }}<br><br>
 
-    {{ Form::label('First Name') }}
-    {{ Form::text('firstname') }}<br><br>
-
-    {{ Form::label('Last Name') }}
-    {{ Form::text('lastname') }}<br><br>
-	
-	{{-- FILL IN HERE --}}
+    {{ Form::label('Name') }}
+    {{ Form::text('name') }}<br><br>
 
     {{ Form::label('Password') }}
     {{ Form::password('password') }}<br><br>
-    <small>Min 6 characters</small>
+    Minimum 6 characters
 
     {{ Form::submit('Submit') }}
 

@@ -39,7 +39,8 @@ class UserController extends BaseController {
 		# Step 1) Define the rules
 		$rules = array(
 			'email' => 'required|email|unique:users,email',
-			'password' => 'required|min:6'
+			'password' => 'required|min:6',
+			'name' => 'required'
 		);
 
 		# Step 2)
@@ -55,8 +56,9 @@ class UserController extends BaseController {
 		}
 
 		$user = new User;
-		$user->email    = Input::get('email');
+		$user->email = Input::get('email');
 		$user->password = Hash::make(Input::get('password'));
+		$user->name = Input::get('name');
 
 		try {
 			$user->save();
@@ -70,14 +72,15 @@ class UserController extends BaseController {
 		# Log in the new user that's been created (no need to see if they're logged in 
 		# just created the new user
 		Auth::login($user);
-		
+
 		# Store the user_id in the session, to be accessed later:
 		Session::put('user_id', $user->id);
 
+		# Store the name in the session, to be accessed later:
+		Session::put('name', $user->name);
+
 		# redirect back to the home page
-		return Redirect::to('/')->with('flash_message', 'Hello! Login was successful!'); 
-// REMOVE IF NO ADD FIRST NAME
-//		return Redirect::to('/')->with('flash_message', 'Hello '. $user->firstname .'!'); 
+		return Redirect::to('/')->with('flash_message', 'Welcome '. $user->name .'!'); 
 
 	}
 
@@ -93,24 +96,26 @@ class UserController extends BaseController {
 
 	/**
 	* Process the login form
-	* @return View
-	*/
+	* @return View	*/
 	public function postLogin() {
 
+		$email = Input::only('email');
+		$password = Input::only('password');
 		$credentials = Input::only('email', 'password');
-
-// NEED TO DO A QUERY USING EMAIL TO GET USER_ID TO STORE SESSION USER_ID
-		# Store the user_id in the session, to be accessed later:
-//		Session::put('user_id', $user->user_id);
-// THIS IS JUST FOR TESTING UNTIL CAN FIX ABOVE PROBLEM WITH GETTING USER_ID
-		Session::put('user_id', '1');
-
+		echo 'credentials: ' . print_r($credentials);
+		echo 'email: ' . print_r($email);
+	
+ 
 		# Note we don't have to hash the password before attempting to auth - Auth::attempt will take care of that for us
-		if (Auth::attempt($credentials, $remember = false)) {
-			return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
+		if (Auth::attempt($credentials)) {
+			
+			$user = User::getUser($email);
 
-// REMOVE IF NO ADD FIRST NAME
-//			return Redirect::intended('/')->with('flash_message', 'Welcome Back'. $user->name . '!');
+			# Store the user_id in the session, to be accessed later:
+			Session::put('user_id', $user->id);
+			Session::put('name', $user->name);
+			
+			return Redirect::intended('/')->with('flash_message', 'Welcome Back '. $user->name . '!');
 		}
 		else {
 			return Redirect::to('/login')

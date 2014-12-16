@@ -1,0 +1,336 @@
+/* Main Styling (backrounds, fonts, etc) */
+
+/*
+a, p, h1, h2, h3 {
+	font-family: "Open Sans";
+	margin: 0;
+}
+*/
+a, p {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	margin-bottom: 20px;
+}
+body {
+	line-height: 1.6em;
+	font-family: "Open Sans";
+}	
+	
+.contentWrapper {
+	width: 900px;
+	height: 100%;
+	margin: auto;
+}
+
+#mainContent {
+	background: #fff;
+	margin: 30px 0px;
+	color: #545454;
+}
+
+#mainContent img {
+	float: left;
+	margin-bottom: 25px;
+	margin-right: 25px;
+	box-shadow: 5px 5px 10px #888;
+	border-radius: 10px;
+}
+
+.interiorImg {
+	margin-top: 25px;
+}
+
+/* Social Media Bar */
+
+#socialMediaBar {
+	height: 35px;
+	width: 100%;
+    font-family: 'Mono Social Icons Font';
+	font-size: 35px;
+	text-align: center;
+	color: #666;
+	background-color: #eee;
+	box-shadow: inset 0px -5px 5px -5px #333;
+	border-bottom: 1px solid #777;
+}
+	
+#topContact {
+	float:right;
+	line-height:150px;
+}
+
+#topContact p, a {
+	display: inline;
+	vertical-align: middle;
+}
+	
+/* Navagation Bar */
+
+#nav {
+	height: 50px;
+	background: #A2B7D0;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	}
+
+#nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+	text-align: center;
+	width: 100%;
+}
+	
+#nav li {
+    display: inline-block;
+}
+
+#nav a {
+	display: block;
+	height: 50px;
+	line-height: 48px;
+	width: 100px;
+	color: #333;
+	font-weight: 400;
+	font-weight: bold;
+}
+	
+#nav a:hover {
+	background-color: #fff;
+	display: block;
+	height: 50px;
+	line-height: 48px;
+	width: 100px;
+	color: #2B3F80;
+	font-weight: 400;
+	font-weight: bold;
+}
+		
+.dropdown {
+	width: 200px;
+	z-index: 1;
+	position: absolute;
+	top: 200px;
+	background: #fff;
+	border: 1px solid #ccc;
+	box-shadow: 8px 8px 10px -5px #333;
+}
+
+.dropdown a {
+	font-size: 15px;
+	line-height: 15px;
+	display: block;
+	width: 100%;
+	padding: 7.5px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.dropdown a:hover{
+	color: white;
+	background-color: #2B3F80;
+}
+	
+/* Header and Footer */
+
+#header, #footer {
+	background: #2B3F80;
+	color: white;
+	width: 100%;
+}
+	
+#header {
+	height: 200px;
+}
+
+#header h1, #header h2{
+	margin: 0px;
+}
+
+#header .contentWrapper {
+	height: 150px;
+	}
+	
+#nav .contentWrapper {
+	height: 50px;
+	}
+
+#footer {
+	font-size: 14px;
+	clear: both;
+	box-shadow: 0px 0px 10px 0px #333;
+}
+
+#titleWrapper {
+	float: left;
+}
+
+#titleWrapper * {
+	display: inline;
+	}
+
+#titleWrapper img {
+	width: 100px;
+	vertical-align: middle;
+	margin: 25px 15px;
+	}
+
+#titlebox {
+	vertical-align: middle;
+	display: inline-block;
+	width: 300px;
+}
+	
+#titlebox * {
+	font-family: "Trebuchet MS",Helvetica,sans-serif;
+	text-transform:uppercase;
+	line-height: 1em;
+	}
+
+.company {
+	text-transform:uppercase;
+}
+	
+.company{
+	font-weight: bold;
+	font-size: 1.3em;
+	line-height: 1.8em;
+	margin-top: 10px;
+}
+
+.email {
+	font-style: italic;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.email a:link , .email a:visited{
+	color: white;
+} 
+
+.email a:hover {
+	color: black; 
+}
+
+.attorneyEmail a:link, .attorneyEmail a:visited {
+	color: #545454;
+}
+
+.attorneyEmail a:hover {
+	color: black;
+	font-weight: bold;
+}
+
+#mapCanvas {
+	border-radius: 10px;
+	margin-top: 5%;
+	margin-bottom: 15px;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 100%;
+	height: 150px;
+}
+
+#columnWrapper-1 {
+	float: left;
+	width: 30%;
+}		
+
+#columnWrapper-2 {
+	float: right;
+	width: 50%;
+ 	padding-left: 10%; 
+}
+
+#rowWrapper-1 {
+/* which background-color? */	
+	background-color: #F1F1F1;
+	background-color: #A2B7D0;
+	padding: 5px 0px;
+	clear: both;
+	text-align: center;
+}
+
+.resource img {
+	margin-left: 30px;
+	border-radius: 2px;
+	opacity: .7;
+}
+
+.resource  img:hover {
+	opacity: 1;
+}
+
+.resource a:hover {
+	background-color: none;
+}
+
+/*** PRACTICES ROW MENU ***/
+.boxWrap .box h1 {
+	padding: 10px;
+	text-align: center;
+	line-height: normal;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+/*** WHEN GET THIS RIGHT, CHANGE SIZE OF IMAGES ***/
+.boxWrap .box img {
+width: 200px;
+	height: 120px;
+	border-top: 1px solid #ccc;
+}
+
+.boxWrap {
+	width:	900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#practiceMenuWrap {
+background-color: #A2B7D0;
+	background-color: white;
+	height: 160px;
+	box-shadow: inset 0px 10px 10px -10px #333;
+	padding-top: 10px;
+}
+
+a:link , a:visited {
+	color: #545454;	
+}
+
+a:hover {
+	color: black; 
+}
+
+.practiceHeader {
+	display: block;
+}
+
+.boxWrap .box {
+	float: left;
+	height: 150px;
+	box-shadow: 8px 8px 10px -5px #333;
+	border-radius: 10px;
+	margin-right: 25px;
+	overflow: hidden;
+	margin-top: 8px; 
+	line-height: 15px;
+	border: 1px solid #ccc;
+	width:200px;
+}
+
+.boxWrap .box#last {
+	margin-right: 0px;
+	}
+
+
+

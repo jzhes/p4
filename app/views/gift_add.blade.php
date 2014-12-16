@@ -7,26 +7,25 @@
 @section('content')
 
 	<h1>Add a new gift</h1>
-	SESSION USER ID: {{ Session::get('user_id'); }}
 		
 	{{ Form::open(array('url' => '/gift/create')) }}
 
+	{{ Form :: hidden ( 'user_id', Session::get('user_id') ) }}
+	
 		{{ Form::label('item','Item') }}
-		{{ Form::text('item'); }}
+		{{ Form::text('item'); }}<br><br>
 
 		{{ Form::label('recipient_id', 'Recipient') }}
-		{{ Form::select('recipient_id', $recipients); }}
+		{{ Form::select('recipient_id', $recipients); }}<br><br>
 
 		{{ Form::label('qty','Quantity') }}
-		{{ Form::number('qty', '1'); }}
+		{{ Form::number('qty', '1'); }}<br><br>
 
 		{{ Form::label('price','Price') }}
-		{{ Form::number('price', '0'); }}
+		{{ Form::number('price', '0'); }}<br><br>
 		
-		{{-- SHOULD SET DEFAULT VALUE FOR PURCHASED? AND TOTAL --}}
-
-		{{ Form::label('online','Purchase Online?') }}
-		{{ Form::checkbox('online', 'no'); }}
+		{{ Form::label('purchased','Purchased?') }}
+		{{ Form::checkbox('purchased'); }}<br><br>
 
 		{{ Form::submit('Add'); }}
 
