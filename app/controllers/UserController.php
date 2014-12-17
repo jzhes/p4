@@ -99,14 +99,29 @@ class UserController extends BaseController {
 	* @return View	*/
 	public function postLogin() {
 
+		# Step 1) Define the rules
+		$rules = array(
+			'email' => 'required|email',
+			'password' => 'required|min:6'
+		);
+
+		# Step 2)
+		$validator = Validator::make(Input::all(), $rules);
+
+		# Step 3
+		if($validator->fails()) {
+
+			return Redirect::to('/login')
+				->with('flash_message', 'Login failed; please fix the errors listed below.')
+				->withInput()
+				->withErrors($validator);
+		}
+
 		$email = Input::only('email');
 		$password = Input::only('password');
 		$credentials = Input::only('email', 'password');
-		echo 'credentials: ' . print_r($credentials);
-		echo 'email: ' . print_r($email);
 	
- 
-		# Note we don't have to hash the password before attempting to auth - Auth::attempt will take care of that for us
+ 		# Note we don't have to hash the password before attempting to auth - Auth::attempt will take care of that for us
 		if (Auth::attempt($credentials)) {
 			
 			$user = User::getUser($email);

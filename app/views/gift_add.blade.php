@@ -7,7 +7,11 @@
 @section('content')
 
 	<h1>Add a new gift</h1>
-		
+	
+	@foreach($errors->all() as $message)
+		<div class='error'>{{ $message }}</div>
+	@endforeach
+
 	{{ Form::open(array('url' => '/gift/create')) }}
 
 	{{ Form :: hidden ( 'user_id', Session::get('user_id') ) }}

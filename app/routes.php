@@ -92,12 +92,11 @@ Route::get('/logout', 'UserController@getLogout' );
 * Gift
 * (Explicit Routing)
 */
-Route::get('/gift', 'GiftController@getIndex');
+/////Route::get('/gift', 'GiftController@getIndex'); 
 Route::get('/gift/edit/{id}', 'GiftController@getEdit');
 Route::post('/gift/edit', 'GiftController@postEdit');
 Route::get('/gift/create', 'GiftController@getCreate');
 Route::post('/gift/create', 'GiftController@postCreate');
-/////Route::post('/gift/delete/{id}', 'GiftController@postDelete');
 Route::post('/gift/delete', 'GiftController@postDelete');
 
 // Views of Gifts
@@ -112,7 +111,6 @@ Route::get('/gift/{id}', 'GiftController@getGift');
 * Recipient
 * (Explicit Routing)
 */
-//Route::get('gift/recipient', 'RecipientController@getIndex'); 
 Route::get('gift/recipient/edit/{id}', 'RecipientController@getEdit');
 Route::post('gift/recipient/edit', 'RecipientController@postEdit');
 Route::get('gift/recipient/create', 'RecipientController@getCreate');

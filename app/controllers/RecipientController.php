@@ -59,14 +59,39 @@ class RecipientController extends \BaseController {
 	*/
 	public function postCreate() {
 
-		# Instantiate the recipient model
+		# Step 1) Define the rules
+		$rules = array(
+			'name' => 'required',
+			'state' => 'size:2',
+			'zip' => 'size:6',
+			'ext_zip' => 'size:4'
+		);
+
+		# Step 2)
+		$validator = Validator::make(Input::all(), $rules);
+
+		# Step 3
+		if($validator->fails()) {
+
+			return Redirect::to('/gift/recipient/create')
+				->with('flash_message', 'Adding of recipient failed; please fix the errors listed below.')
+				->withInput()
+				->withErrors($validator);
+		}
+	
 		$recipient = new recipient();
 
 		$recipient->fill(Input::all());
 
-		# Magic: Eloquent
-		$recipient->save();
-
+		try {
+			$recipient->save();
+		}
+		catch (Exception $e) {
+			return Redirect::to('/gift/recipient/create')
+				->with('flash_message', 'Saving of new recipient failed. Please try again.')
+				->withInput();
+		}
+		
 		return Redirect::to('/gift/recipient/' . $recipient->id . '}')
 			->with('flash_message', 'Your recipient ' . $recipient->name . ' has been added.');
 
@@ -77,10 +102,9 @@ class RecipientController extends \BaseController {
 	* @return View
 	*/
 	public function getEdit($id) {
+		
 		try {
-		    $recipient = Recipient::findOrFail($id);  // This does not need to be user/recipient
-													  // because you already have the recipient id 
-													  // which is unique to the table.
+		    $recipient = Recipient::findOrFail($id);  
 		}
 		catch(exception $e) {
 		    return Redirect::to('gift/recipient')->with('flash_message', 'Recipient not found');
@@ -101,14 +125,41 @@ class RecipientController extends \BaseController {
 	        $recipient = Recipient::findOrFail(Input::get('id'));
 	    }
 	    catch(exception $e) {
-	        return Redirect::to('gift/recipient')->with('flash_message', 'Recipient not found');
+	        return Redirect::to('gift/recipient/all_recipients')->with('flash_message', 'Recipient not found');
 	    }
 
+		# Step 1) Define the rules
+		$rules = array(
+			'state' => 'size:2',
+			'zip' => 'size:6',
+			'ext_zip' => 'size:4'
+		);
+
+		# Step 2)
+		$validator = Validator::make(Input::all(), $rules);
+
+		# Step 3
+		if($validator->fails()) {
+
+			return Redirect::to('/gift/recipient/edit/$recipient->id')
+				->with('flash_message', 'Editing of recipient failed; please fix the errors listed below.')
+				->withInput()
+				->withErrors($validator);
+		}
+
 	    $recipient->fill(Input::all());
-	    $recipient->save();
+		try {
+			$recipient->save();
+		}
+		catch (Exception $e) {
+			return Redirect::to('/gift/recipient/edit/$recipient->id')
+				->with('flash_message', 'Editing of recipient failed. Please try again.')
+				->withInput();
+		}
+
 		return Redirect::to('/gift/recipient/' . $recipient->id . '}')
 			->with('flash_message', 'Your recipient ' . $recipient->name . ' has been updated.');
-
+		
 	}
 
 	/**
@@ -125,7 +176,12 @@ class RecipientController extends \BaseController {
 	        return Redirect::to('/')->with('flash_message', 'Could not delete recipient - not found.');
 	    }
 
-	    Recipient::destroy(Input::get('id'));
+		try {
+			Recipient::destroy(Input::get('id'));
+	    }
+	    catch(exception $e) {
+	        return Redirect::to('/')->with('flash_message', 'Cannot delete recipient - ' . $recipient->name . ' is already on your Christmas list!');
+	    }
 
 	    return Redirect::to('/gift/recipient/all_recipients')->with('flash_message', 'Recipient deleted.');
 

@@ -12,12 +12,17 @@
 
 	<h1>Edit</h1>
 
+	@foreach($errors->all() as $message)
+		<div class='error'>{{ $message }}</div>
+	@endforeach
+			{{ Form::TEXT('id', $recipient['id']); }}
+
 	<h2>{{{ $recipient['name'] }}}</h2> 
 
 	{{---- EDIT -----}}
 	{{ Form::open(array('url' => 'gift/recipient/edit')) }}
 
-		{{ Form::hidden('id',$recipient['id']); }}
+		{{ Form::hidden('id', $recipient['id']); }}
 		
 		<div class='form-group'>
 			{{ Form::label('address_line_1','Address Line 1') }}

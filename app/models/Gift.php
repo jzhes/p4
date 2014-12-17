@@ -30,11 +30,10 @@ class Gift extends Eloquent {
     */
     public static function getData($criteria, $id) {
 
-        # If there is criteria, get data using the criteria
+		# If there is criteria, get data using the criteria
   		if($criteria) {
 			
 			if ($criteria == "R") {
-				# Eager load recipients
 				$gifts = Gift::with('recipient')
 					->where('user_id', '=', Session::get('user_id'))
 					->where('recipient_id', '=', $id)
@@ -42,7 +41,6 @@ class Gift extends Eloquent {
 			} 
 			else
 			if($criteria == "P") {
-				# Eager load recipients
 				$gifts = Gift::with('recipient')
 					->where('user_id', '=', Session::get('user_id'))
 					->where('purchased', '=', '1')
@@ -52,13 +50,17 @@ class Gift extends Eloquent {
             }
 			else 
 			if ($criteria == "NP") {
-				# Eager load recipients
 				$gifts = Gift::with('recipient')
 					->where('user_id', '=', Session::get('user_id'))
 					->where('purchased', '=', '0')
 					-> orderBy ('recipient_id')
 					->get();
 			}
+			else
+			if ($criteria == "G") {
+				$gifts = Gift::where('id', '=', $id)
+						->first();
+			} 
 		}
         # If no criteria, fetch all gifts
 		else {
@@ -83,31 +85,4 @@ class Gift extends Eloquent {
         return $total;
     }
 
-    /**********************************************************/
-	public static function search($query) {
-
-        # If there is a query, search with that query
-  		if($query) {
-
-            # Eager load statuses and recipients
-            $gifts = Gift::with('recipient')
-				->whereHas('recipient', function($q) use($query) {
-					$q->where('first_name', 'LIKE', "%$query%");
-				})
-				->where('user_id', '=', Session::get('user_id'))
-				->orWhere('item', 'LIKE', "%$query%")
-				->get();
-
-		}
-
-   # Otherwise, just fetch all gifts
- 	else {
-		
-            $gifts = Gift::with('recipient')
-				->where('user_id', '=', Session::get('user_id'))
-				->get();
-        }
-
-        return $gifts;
-    }	
 }

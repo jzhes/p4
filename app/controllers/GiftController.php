@@ -36,13 +36,14 @@ class GiftController extends \BaseController {
 	*/
 	public function getGift($id) {
 	
-		$criteria = '';
-		$gift = Gift::getData($criteria, $id)->first();
+		$criteria = 'G';
+		$gift = Gift::getData($criteria, $id);
+
 		return View::make('gift_view')
 			->with('gift', $gift);
 		
 	}
-	
+		
 	/**
 	* Display only those Gifts which have been purchased
 	* @return View
@@ -97,8 +98,14 @@ class GiftController extends \BaseController {
 	public function getCreate() {
 
 		$recipients = Recipient::getIdNamePair();
-    	return View::make('gift_add')->with('recipients', $recipients);
 
+		if (!$recipients) {
+			return Redirect::action('IndexController@getIndex')->with('flash_message','You must add a recipient before adding a gift.');
+		} 
+		else {
+			return View::make('gift_add')->with('recipients', $recipients);
+		}
+		
 	}
 
 	/**
@@ -107,6 +114,25 @@ class GiftController extends \BaseController {
 	*/
 	public function postCreate() {
 
+		# Step 1) Define the rules
+		$rules = array(
+			'item' => 'required',
+			'quantity' => 'integer',
+			'price' => 'numeric'
+		);
+
+		# Step 2)
+		$validator = Validator::make(Input::all(), $rules);
+
+		# Step 3
+		if($validator->fails()) {
+
+			return Redirect::to('/gift/create')
+				->with('flash_message', 'Adding of gift failed; please fix the errors listed below.')
+				->withInput()
+				->withErrors($validator);
+		}
+	
 		# Instantiate the gift model
 		$gift = new gift();
 
@@ -114,10 +140,18 @@ class GiftController extends \BaseController {
 		$gift->user_id = Session::get('user_id');
 		$gift->total = $gift->qty * $gift->price;
 
-		# Magic: Eloquent
-		$gift->save();
+		try {
+			$gift->save();
+		}
+		catch (Exception $e) {
+			return Redirect::to('/gift/create')
+				->with('flash_message', 'Saving of new gift failed. Please try again.')
+				->withInput();
+		}
 
-		return Redirect::action('GiftController@getIndex')->with('flash_message','Your gift has been added.');
+		return Redirect::to('/gift/' . $gift->id . '}')
+			->with('flash_message', 'Your gift has been updated.');
+	
 
 	}
 
@@ -128,11 +162,11 @@ class GiftController extends \BaseController {
 	public function getEdit($id) {
 
 		try {
-		    $gift    = Gift::findOrFail($id);  // THIS NEEDS TO BE GIFT/RECIPIENT COMBO
+		    $gift    = Gift::findOrFail($id);  
 		    $recipients = Recipient::getIdNamePair();
 		}
 		catch(exception $e) {
-		    return Redirect::to('/gift')->with('flash_message', 'Gift not found');
+		    return Redirect::to('/gift/all_gifts')->with('flash_message', 'Gift not found');
 		}
 
     	return View::make('gift_edit')
@@ -151,14 +185,41 @@ class GiftController extends \BaseController {
 	        $gift = Gift::findOrFail(Input::get('id'));
 	    }
 	    catch(exception $e) {
-	        return Redirect::to('/gift')->with('flash_message', 'Gift not found');
+	        return Redirect::to('/gift/all_gifts')->with('flash_message', 'Gift not found');
 	    }
+
+		# Step 1) Define the rules
+		$rules = array(
+			'quantity' => 'integer',
+			'price' => 'numeric'
+		);
+
+		# Step 2)
+		$validator = Validator::make(Input::all(), $rules);
+
+		# Step 3
+		if($validator->fails()) {
+
+			return Redirect::to('/gift/edit/$gift->id')
+				->with('flash_message', 'Editing of gift failed; please fix the errors listed below.')
+				->withInput()
+				->withErrors($validator);
+		}
 
 	    $gift->fill(Input::all());
 		$gift->total = $gift->qty * $gift->price;
-	    $gift->save();
 
-	   	return Redirect::action('GiftController@getGift')->with('flash_message','Your changes have been saved.');
+		try {
+			$gift->save();
+		}
+		catch (Exception $e) {
+			return Redirect::to('/gift/edit/$gift->id')
+				->with('flash_message', 'Saving of gift failed. Please try again.')
+				->withInput();
+		}
+
+		return Redirect::to('/gift/' . $gift->id . '}')
+			->with('flash_message', 'Your changes have been saved.');
 
 	}
 
@@ -174,66 +235,13 @@ class GiftController extends \BaseController {
 	        $gift = Gift::findOrFail(Input::get('id'));
 	    }
 	    catch(exception $e) {
-	        return Redirect::to('/gift')->with('flash_message', 'Could not delete gift - not found.');
+	        return Redirect::to('/gift/all_gifts')->with('flash_message', 'Could not delete gift - not found.');
 	    }
 
 	    Gift::destroy(Input::get('id'));
 
-	    return Redirect::to('/gift')->with('flash_message', 'Gift was deleted.');
+	    return Redirect::to('/gift/all_gifts')->with('flash_message', 'Your gift was deleted.');
 
 	}
 
-	/******************************************************/
-	/**
-	* Display all gifts
-	* @return View
-	*/
-	public function getIndex() {
-
-		$query  = Input::get('query');
-		$gifts = Gift::search($query);
-		$total = Gift::calcTotal($gifts);
-		return View::make('gift_index')
-			->with('total', $total)
-			->with('gifts', $gifts)
-			->with('query', $query);
-
-	}
-
-	/**
-	* Process a gift search
-	* Called w/ Ajax
-	*/
-	public function postSearch() {
-
-		if(Request::ajax()) {
-
-			$query  = Input::get('query');
-			# Do the actual query
-	        $gifts  = Gift::search($query);
-
-	        $results = '';
-			foreach($gifts as $gift) {
-				# Created a "stub" of a view called gift_search_result.php; all it is is a stub of code to display a gift
-				# For each gift, we'll add a new stub to the results
-				$results .= View::make('gift_search_result')->with('gift', $gift)->render();
-			}
-
-			# Return the HTML/View to JavaScript...
-			return $results;
-			
-		}
-	}
-	
-	/**
-	* Process the searchform
-	* @return View
-	*/
-
-	public function getSearch() {
-
-		return View::make('gift_search');
-
-	}
-	
 }

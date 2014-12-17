@@ -34,32 +34,7 @@ body {
 	color: #545454;
 }
 
-#mainContent img {
-	float: left;
-	margin-bottom: 25px;
-	margin-right: 25px;
-	box-shadow: 5px 5px 10px #888;
-	border-radius: 10px;
-}
 
-.interiorImg {
-	margin-top: 25px;
-}
-
-/* Social Media Bar */
-
-#socialMediaBar {
-	height: 35px;
-	width: 100%;
-    font-family: 'Mono Social Icons Font';
-	font-size: 35px;
-	text-align: center;
-	color: #666;
-	background-color: #eee;
-	box-shadow: inset 0px -5px 5px -5px #333;
-	border-bottom: 1px solid #777;
-}
-	
 #topContact {
 	float:right;
 	line-height:150px;
@@ -70,10 +45,22 @@ body {
 	vertical-align: middle;
 }
 	
+/* Site Navigation only:  */
+#sitenav  li {
+	display: inline;
+	font-size: 90%;
+	padding-left: 1em; 
+	padding-bottom: 5px;
+}
+
+#sitenav a:active {
+	text-decoration: none;
+}
+	
 /* Navagation Bar */
 
 #nav {
-	height: 50px;
+	height: 30px;
 	background: #A2B7D0;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -94,7 +81,7 @@ body {
 
 #nav a {
 	display: block;
-	height: 50px;
+	height: 30px;
 	line-height: 48px;
 	width: 100px;
 	color: #333;
