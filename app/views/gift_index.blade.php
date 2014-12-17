@@ -6,7 +6,7 @@
 
 @section('content')
 
-	<h1>Your Christmas Gift List</h1>
+	<h2>Your Christmas Gift List</h2>
 
 	@if(sizeof($gifts) == 0)
 		No gifts found

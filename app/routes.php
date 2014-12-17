@@ -92,7 +92,6 @@ Route::get('/logout', 'UserController@getLogout' );
 * Gift
 * (Explicit Routing)
 */
-/////Route::get('/gift', 'GiftController@getIndex'); 
 Route::get('/gift/edit/{id}', 'GiftController@getEdit');
 Route::post('/gift/edit', 'GiftController@postEdit');
 Route::get('/gift/create', 'GiftController@getCreate');
@@ -105,7 +104,6 @@ Route::get('/gift/recipient_gifts/{id}', 'GiftController@getRecipientGifts');
 Route::get('/gift/purchased_gifts', 'GiftController@getPurchasedGifts');
 Route::get('/gift/not_purchased_gifts', 'GiftController@getNotPurchasedGifts');
 Route::get('/gift/{id}', 'GiftController@getGift');
-
 
 /**
 * Recipient
