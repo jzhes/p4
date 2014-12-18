@@ -139,7 +139,7 @@ class GiftController extends BaseController {
 		}
 	
 		# Instantiate the gift model
-		$gift = new gift();
+		$gift = new Gift();
 
 		$gift->fill(Input::all());
 		if ($gift->price < 0) {
