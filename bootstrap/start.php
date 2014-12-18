@@ -30,7 +30,6 @@ $env = $app->detectEnvironment(array(
 ));
 */
 
-
 $env = $app->detectEnvironment(function() {
 
     # See if there's an environment.php file...
