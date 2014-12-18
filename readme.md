@@ -8,7 +8,7 @@ xmas giftr: This application uses Laravel to create a Christmas Gift List applic
 a member may add gifts/recipients and report on different criteria.
 
 ## Demo Information:
-http://screencast.com/t/1nW8PYQD3iCs
+http://screencast.com/t/u4uSTVXd56
 
 ## Details for teaching team:
 test credentials: 
