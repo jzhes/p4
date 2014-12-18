@@ -24,13 +24,13 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-/*
+
 $env = $app->detectEnvironment(array(
     'local' => array('*'),
 ));
-*/
 
 
+/*
 $env = $app->detectEnvironment(function() {
 
     # See if there's an environment.php file...
@@ -44,6 +44,7 @@ $env = $app->detectEnvironment(function() {
     }
 
 });
+*/
 
 
 /*
