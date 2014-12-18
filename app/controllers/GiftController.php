@@ -24,10 +24,12 @@ class GiftController extends \BaseController {
 		$id = '';
 		$gifts = Gift::getData($criteria, $id);
 		$total = Gift::calcTotal($gifts);
+		$recipients = Recipient::getData($criteria, Session::get('user_id'))->first();
 		return View::make('gift_index')
+			->with('criteria', $criteria)
+			->with('recipients', $recipients)
 			->with('total', $total)
 			->with('gifts', $gifts);
-		
 	}
 
 	/**
@@ -55,6 +57,7 @@ class GiftController extends \BaseController {
 		$gifts = Gift::getData($criteria, $id);
 		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('criteria', $criteria)
 			->with('total', $total)
 			->with('gifts', $gifts);
 
@@ -71,6 +74,7 @@ class GiftController extends \BaseController {
 		$gifts = Gift::getData($criteria, $id);
 		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('criteria', $criteria)
 			->with('total', $total)
 			->with('gifts', $gifts);
 	}
@@ -85,6 +89,7 @@ class GiftController extends \BaseController {
 		$gifts = Gift::getData($criteria, $id);
 		$total = Gift::calcTotal($gifts);
 		return View::make('gift_index')
+			->with('criteria', $criteria)
 			->with('total', $total)
 			->with('gifts', $gifts);
 
@@ -137,6 +142,12 @@ class GiftController extends \BaseController {
 		$gift = new gift();
 
 		$gift->fill(Input::all());
+		if ($gift->price < 0) {
+			return Redirect::to('/gift/create')
+				->with('flash_message', 'Price must a number > 0. Please try again.')
+				->withInput();
+		}
+		
 		$gift->user_id = Session::get('user_id');
 		$gift->total = $gift->qty * $gift->price;
 
@@ -207,6 +218,13 @@ class GiftController extends \BaseController {
 		}
 
 	    $gift->fill(Input::all());
+
+		if ($gift->price < 0) {
+			return Redirect::to('/gift/edit/$gift->id')
+				->with('flash_message', 'Price must a number > 0. Please try again.')
+				->withInput();
+		}
+
 		$gift->total = $gift->qty * $gift->price;
 
 		try {

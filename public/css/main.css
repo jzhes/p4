@@ -1,4 +1,3 @@
-
 a {
 	text-decoration: none;
 }
@@ -20,7 +19,7 @@ body {
 	margin: auto;
 	background-color: white;
 	margin-top: 30px;
-	padding: 25px;
+	padding: 25px 25px 60px 25px;
 	box-shadow: 5px 5px 10px #888;
 	border-radius: 10px;
 }
@@ -46,8 +45,15 @@ body {
 }
 
 th {
+	padding-top: 30px;
 	padding-bottom: 30px;
-	font-size: 1.3em;
+	font-size: 1.2em;
+	padding-right: 15px;
+}
+
+td {
+	padding-bottom: 20px;
+	padding-right: 15px;
 }
 
 h1 {
@@ -83,8 +89,9 @@ h2  {
 }
 
 .total {
-	font-size: 1.5em;
+	font-size: 1.2em;
 	font-weight: bold;
+	margin-top: 30px;
 }
 
 .headimg {
@@ -105,11 +112,9 @@ h2  {
 	padding-bottom: 20px;
 }
 .contentimg {
-	
 	padding-top: 40px;
 	width: 400px;
 	height: 250px;
-
 }
 
 td {
@@ -123,17 +128,18 @@ td {
 
 #sitenav {
 	padding-top: 30px;
-	padding-bottom: 10px;
-	
 }
+
+#sitenav  ul {
+	padding-top: 30px;
+	padding-bottom: 5px;
+	margin-bottom: 60px;
+}
+
 #sitenav  li {
 	display: inline;
 	padding-left: 1em; 	
 	padding-bottom: 5px;
-}
-
-#sitenav a:active {
-	text-decoration: none;
 }
 	
 a:link , a:visited {

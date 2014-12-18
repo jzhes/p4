@@ -25,14 +25,15 @@
 			<h1>{{ Session::get('name') }}'s xmas giftr</h1>
 		@endif	
 
+
 		<div id="sitenav">
 			<ul>
 			@if(Auth::check())
-				<li><a href='/gift/recipient/create'>Add a Recipient</a></li>
-				<li><a href='/gift/create'>Add a Gift</a></li>
-				<li><a href='/gift/all_gifts'>View all Gifts</a></li>
-				<li><a href='/gift/recipient/all_recipients'>View all Recipients</a></li>
-				<li><a href='/gift/purchased_gifts'>View Gifts Purchased</a></li>
+				<li><a href='/gift/recipient/create'>Add a Recipient |</a></li>
+				<li><a href='/gift/create'>Add a Gift |</a></li>
+				<li><a href='/gift/all_gifts'>View all Gifts |</a></li>
+				<li><a href='/gift/recipient/all_recipients'>View all Recipients |</a></li>
+				<li><a href='/gift/purchased_gifts'>View Gifts Purchased |</a></li>
 				<li><a href='/gift/not_purchased_gifts'>View Gifts Not Purchased</a></li>
 			@endif
 			</ul>

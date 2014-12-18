@@ -35,7 +35,7 @@
 
 			<div class='form-group'>
 				{{ Form::label('price','Price') }}
-				{{ Form::text('price',$gift['price']); }}
+				{{ Form::text('price',$gift['price'], array('size'=>'5')); }}
 			</div>
 
 			<div class='form-group'>
@@ -43,10 +43,12 @@
 				{{ Form::checkbox('purchased', $gift['purchased']); }}
 			</div>
 
-			{{ Form::submit('Save'); }}
+			<div class='form-group'>
+				{{ Form::submit('Save'); }}
+			</div>
 
 		{{ Form::close() }}
-
+ 
 	</div>
 
 @stop

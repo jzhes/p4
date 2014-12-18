@@ -19,7 +19,7 @@
 
 			<div class='form-group'>
 				{{ Form::label('name') }}
-				{{ Form::text('name'); }}
+				{{ Form::text('name', '', array('size' => '30')); }}
 			</div>
 				
 			<div class='form-group'>
@@ -34,24 +34,20 @@
 
 			<div class='form-group'>
 				{{ Form::label('city') }}
-				{{ Form::text('city') }}
+				{{ Form::text('city', '', array('size' => '32')) }}
 			</div>
 
 			<div class='form-group'>
 				{{ Form::label('state') }}
-				{{ Form::text('state') }}
+				{{ Form::text('state', '', array('size' => '1', 'maxlength' => '2')) }}
 			</div>
 
 			<div class='form-group'>
 				{{ Form::label('zip') }}
-				{{ Form::text('zip') }}
+				{{ Form::text('zip', '', array('size' => '2', 'maxlength' => '5')) }}-
+				{{ Form::text('ext_zip', '', array('size' => '2', 'maxlength' => '4')) }}
 			</div>
-
-			<div class='form-group'>
-				{{ Form::label('ext_zip') }}
-				{{ Form::text('ext_zip') }}
-			</div>
-			
+		
 			<div class='form-group'>
 				{{ Form::submit('Add'); }}
 			</div>

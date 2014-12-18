@@ -20,7 +20,7 @@
 		
 			<div class='form-group'>
 				{{ Form::label('item','Item') }}
-				{{ Form::text('item'); }}
+				{{ Form::text('item', '', array('size'=>'35')); }}
 			</div>
 			
 			<div class='form-group'>
@@ -30,12 +30,12 @@
 
 			<div class='form-group'>
 				{{ Form::label('qty','Quantity') }}
-				{{ Form::number('qty', '1'); }}
+				{{ Form::number('qty', '1', array('min'=> '0')); }}
 			</div>
 
 			<div class='form-group'>
 				{{ Form::label('price','Price') }}
-				{{ Form::number('price', '0'); }}
+				{{ Form::text('price', '0.0'); }}
 			</div>
 				
 			<div class='form-group'>

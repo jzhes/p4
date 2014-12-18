@@ -6,10 +6,20 @@
 
 @section('content')
 
-	<h2>Your Christmas Gift List</h2>
+	@if($criteria == 'NP')
+		<h2>Gifts Not Purchased</h2>
+	@elseif ($criteria == 'P')
+		<h2>Gifts Purchased</h2>
+	@else
+		<h2>Your Christmas Gift List</h2>
+	@endif	
 
 	@if(sizeof($gifts) == 0)
-		No gifts found.   To get started, please first add one or more recipients.
+		@if((($criteria != 'NP') && ($criteria != 'P') && sizeof($recipients) == 0))
+			Before adding your your first gift, you must add one or more recipients.
+		@else
+			No gifts found.
+		@endif	
 	@else
 
 		<table class="gifttable">

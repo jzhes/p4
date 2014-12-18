@@ -120,7 +120,7 @@ class UserController extends BaseController {
 		$email = Input::only('email');
 		$password = Input::only('password');
 		$credentials = Input::only('email', 'password');
-	
+
  		# Note we don't have to hash the password before attempting to auth - Auth::attempt will take care of that for us
 		if (Auth::attempt($credentials)) {
 			
