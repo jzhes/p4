@@ -1,6 +1,6 @@
 <?php
 
-class GiftController extends \BaseController {
+class GiftController extends BaseController {
 
 	/**
 	*
