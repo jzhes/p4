@@ -63,7 +63,7 @@ class RecipientController extends \BaseController {
 		$rules = array(
 			'name' => 'required',
 			'state' => 'size:2',
-			'zip' => 'size:6',
+			'zip' => 'size:5',
 			'ext_zip' => 'size:4'
 		);
 
@@ -74,7 +74,7 @@ class RecipientController extends \BaseController {
 		if($validator->fails()) {
 
 			return Redirect::to('/gift/recipient/create')
-				->with('flash_message', 'Adding of recipient failed; please fix the errors listed below.')
+				->with('flash_message', 'Adding of recipient failed.  Please fix the errors listed below.')
 				->withInput()
 				->withErrors($validator);
 		}
@@ -131,7 +131,7 @@ class RecipientController extends \BaseController {
 		# Step 1) Define the rules
 		$rules = array(
 			'state' => 'size:2',
-			'zip' => 'size:6',
+			'zip' => 'size:5',
 			'ext_zip' => 'size:4'
 		);
 

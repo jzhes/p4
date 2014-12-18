@@ -50,7 +50,7 @@ class UserController extends BaseController {
 		if($validator->fails()) {
 
 			return Redirect::to('/signup')
-				->with('flash_message', 'Sign up failed; please fix the errors listed below.')
+				->with('flash_message', 'Sign up failed! Please fix the errors listed below.')
 				->withInput()
 				->withErrors($validator);
 		}
@@ -65,7 +65,7 @@ class UserController extends BaseController {
 		}
 		catch (Exception $e) {
 			return Redirect::to('/signup')
-				->with('flash_message', 'Sign up failed; please try again.')
+				->with('flash_message', 'Sign up failed! Please try again.')
 				->withInput();
 		}
 
@@ -80,7 +80,7 @@ class UserController extends BaseController {
 		Session::put('name', $user->name);
 
 		# redirect back to the home page
-		return Redirect::to('/')->with('flash_message', 'Welcome '. $user->name .'!'); 
+		return Redirect::to('/gift/all_gifts')->with('flash_message', 'Welcome '. $user->name .'!'); 
 
 	}
 
@@ -112,7 +112,7 @@ class UserController extends BaseController {
 		if($validator->fails()) {
 
 			return Redirect::to('/login')
-				->with('flash_message', 'Login failed; please fix the errors listed below.')
+				->with('flash_message', 'Login failed! Please fix the errors listed below.')
 				->withInput()
 				->withErrors($validator);
 		}
@@ -130,11 +130,11 @@ class UserController extends BaseController {
 			Session::put('user_id', $user->id);
 			Session::put('name', $user->name);
 			
-			return Redirect::intended('/')->with('flash_message', 'Welcome Back '. $user->name . '!');
+			return Redirect::to('/gift/all_gifts')->with('flash_message', 'Welcome Back '. $user->name . '!');
 		}
 		else {
 			return Redirect::to('/login')
-				->with('flash_message', 'Log in failed; please try again.')
+				->with('flash_message', 'Log in failed! Please try again.')
 				->withInput();
 		}
 

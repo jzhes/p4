@@ -6,25 +6,34 @@
 
 @section('content')
 
-<h2>Log in</h2>
+	<div class="mainContent">
+	<h1 class="header">xmas giftr</h1>
 
-	@foreach($errors->all() as $message)
-		<div class='error'>{{ $message }}</div>
-	@endforeach
 
-	{{ Form::open(array('url' => '/login')) }}
+			<h2 class="subhead">Log in</h2>
 
-		{{ Form::label('email') }}
-		
-		{{-- REMOVE BELOW BEFORE FINAL --}}
-		{{ Form::text('email','test@test.com') }}
+			@foreach($errors->all() as $message)
+				<div class='error'>{{ $message }}</div>
+			@endforeach
 
-		{{-- REMOVE BELOW BEFORE FINAL --}}
-		{{ Form::label('password') }} (testtest)
-		{{ Form::password('password') }}
+			{{ Form::open(array('url' => '/login')) }}
 
-		{{ Form::submit('Submit') }}
+				<div class='form-group'>
+					{{ Form::label('email:') }}
+					{{ Form::text('email') }}
+				</div>
+				
+				<div class='form-group'>
+					{{ Form::label('password:') }} 
+					{{ Form::password('password') }}
+				</div>
 
-	{{ Form::close() }}
+				<div class='form-group'>
+					{{ Form::submit('Submit') }}
+				</div>
 
+			{{ Form::close() }}
+
+	</div>
+	
 @stop

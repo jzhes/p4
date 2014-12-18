@@ -9,7 +9,7 @@
 	<h2>Your Christmas Gift List</h2>
 
 	@if(sizeof($gifts) == 0)
-		No gifts found
+		No gifts found.   To get started, please first add one or more recipients.
 	@else
 
 		<table class="gifttable">
@@ -47,8 +47,8 @@
 					</td>
 				</tr>
 				@endforeach
-				<tr>
-					<td>TOTAL:</td>
+				<tr class="total">
+					<td>TOTAL:  </td>
 					<td>${{ $total }}</td>
 				</tr>	
 			</tbody>

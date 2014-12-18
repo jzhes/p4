@@ -6,38 +6,58 @@
 
 @section('content')
 
+	<div class="mainContent">
+	
 		<h2>Add a new recipient</h2>
 
 		@foreach($errors->all() as $message)
 			<div class='error'>{{ $message }}</div>
 		@endforeach
-			
+		
 		{{ Form::open(array('url' => 'gift/recipient/create')) }}
 			{{ Form :: hidden ( 'user_id', Session::get('user_id') ) }}
 
-			{{ Form::label('name','Name') }}
-			{{ Form::text('name'); }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('name') }}
+				{{ Form::text('name'); }}
+			</div>
+				
+			<div class='form-group'>
+				{{ Form::label('address_line_1') }}
+				{{ Form::text('address_line_1') }}
+			</div>
 
-			{{ Form::label('Address Line 1') }}
-			{{ Form::text('address_line_1') }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('address_line_2') }}
+				{{ Form::text('address_line_2') }}
+			</div>
 
-			{{ Form::label('Address Line 2') }}
-			{{ Form::text('address_line_2') }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('city') }}
+				{{ Form::text('city') }}
+			</div>
 
-			{{ Form::label('City') }}
-			{{ Form::text('city') }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('state') }}
+				{{ Form::text('state') }}
+			</div>
 
-			{{ Form::label('State') }}
-			{{ Form::text('state') }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('zip') }}
+				{{ Form::text('zip') }}
+			</div>
 
-			{{ Form::label('Zip') }}
-			{{ Form::text('zip') }}<br><br>
-
-			{{ Form::label('Extended Zip') }}
-			{{ Form::text('ext_zip') }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('ext_zip') }}
+				{{ Form::text('ext_zip') }}
+			</div>
 			
-			{{ Form::submit('Add'); }}
+			<div class='form-group'>
+				{{ Form::submit('Add'); }}
+			</div>
 
 		{{ Form::close() }}
 
+	</div>	
+		
 @stop

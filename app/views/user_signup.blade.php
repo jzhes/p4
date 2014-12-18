@@ -6,25 +6,39 @@
 
 @section('content')
 
-<h2>Sign up</h2>
+	<div class="mainContent">
+	<h1 class="header">xmas giftr</h1>
 
-@foreach($errors->all() as $message)
-	<div class='error'>{{ $message }}</div>
-@endforeach
+		<h2 class="subhead">Sign Up</h2>
 
-{{ Form::open(array('url' => '/signup')) }}
+		@foreach($errors->all() as $message)
+			<div class='error'>{{ $message }}</div>
+		@endforeach
 
-    {{ Form::label('Email') }}
-    {{ Form::text('email') }}<br><br>
+		{{ Form::open(array('url' => '/signup')) }}
 
-    {{ Form::label('Name') }}
-    {{ Form::text('name') }}<br><br>
+			<div class='form-group'>
+				{{ Form::label('email') }}
+				{{ Form::text('email') }}<br><br>
+			</div>
+				
+			<div class='form-group'>
+				{{ Form::label('name') }}
+				{{ Form::text('name') }}<br><br>
+			</div>
 
-    {{ Form::label('Password') }}
-    {{ Form::password('password') }}<br><br>
-    Minimum 6 characters
+			<div class='form-group'>
+				{{ Form::label('password') }}
+				{{ Form::password('password') }}
+				<p class="pswd">(Minimum 6 characters)</p>
+			</div>
 
-    {{ Form::submit('Submit') }}
+			<div class='form-group'>
+				{{ Form::submit('Submit') }}
+			</div>
 
-{{ Form::close() }}
+		{{ Form::close() }}
+		
+	</div>
+	
 @stop

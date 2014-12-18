@@ -100,7 +100,7 @@ class GiftController extends \BaseController {
 		$recipients = Recipient::getIdNamePair();
 
 		if (!$recipients) {
-			return Redirect::action('IndexController@getIndex')->with('flash_message','You must add a recipient before adding a gift.');
+			return Redirect::action('RecipientController@getCreate')->with('flash_message','You must add a recipient before adding a gift.');
 		} 
 		else {
 			return View::make('gift_add')->with('recipients', $recipients);
@@ -128,7 +128,7 @@ class GiftController extends \BaseController {
 		if($validator->fails()) {
 
 			return Redirect::to('/gift/create')
-				->with('flash_message', 'Adding of gift failed; please fix the errors listed below.')
+				->with('flash_message', 'Adding of gift failed. Please fix the errors listed below.')
 				->withInput()
 				->withErrors($validator);
 		}

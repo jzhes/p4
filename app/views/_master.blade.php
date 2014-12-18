@@ -12,8 +12,6 @@
 </head>
 <body>
 
-<div id="mainContent">
-
 	<div class="contentWrapper">
 		@if(Auth::check())
 			<a href='/logout' id="logout">Log out {{ Auth::user()->email; }}</a>
@@ -27,14 +25,9 @@
 			<h1>{{ Session::get('name') }}'s xmas giftr</h1>
 		@endif	
 
-		@if(Session::get('flash_message'))
-			<div class='flash-message'>{{ Session::get('flash_message') }}</div>
-		@endif
-
 		<div id="sitenav">
 			<ul>
 			@if(Auth::check())
-				<li><a href='/'>Home</a></li>
 				<li><a href='/gift/recipient/create'>Add a Recipient</a></li>
 				<li><a href='/gift/create'>Add a Gift</a></li>
 				<li><a href='/gift/all_gifts'>View all Gifts</a></li>
@@ -45,17 +38,15 @@
 			</ul>
 		</div>
 
+		@if ((Session::get('flash_message')) and (Auth::check()))
+			<div class='flash-message'>{{ Session::get('flash_message') }}</div>
+		@endif
 
 		<div class="content">	
 			@yield('content')
-		<div>	
-
-		@if(!Auth::check())
-			<a href='/'><img class='contentimg' src='/images/white_tree_on_red.jpg' alt='Tree'></a>
-		@endif
+		</div>	
 
 	</div>
-</div>	
 	@yield('/body')
 
 </body>

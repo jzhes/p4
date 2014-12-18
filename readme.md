@@ -12,6 +12,9 @@ http://screencast.com/t/1nW8PYQD3iCs
 
 ## Details for teaching team:
 test credentials: 
+email: test1@test.com/
+password: 111111
+	
 
 
 ## Outside code

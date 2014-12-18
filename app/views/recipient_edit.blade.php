@@ -10,14 +10,13 @@
 
 @section('content')
 
-		<h2>Edit a Recipient</h2>
+	<div class="mainContent">
+
+		<h2>Edit Recipient:	 {{{ $recipient['name'] }}} </h2>
 
 		@foreach($errors->all() as $message)
 			<div class='error'>{{ $message }}</div>
 		@endforeach
-				{{ Form::TEXT('id', $recipient['id']); }}
-
-		<h2>{{{ $recipient['name'] }}}</h2> 
 
 		{{---- EDIT -----}}
 		{{ Form::open(array('url' => 'gift/recipient/edit')) }}
@@ -30,7 +29,7 @@
 			</div>
 
 			<div class='form-group'>
-				{{ Form::label('address_line_2','name Line 2') }}
+				{{ Form::label('address_line_2','Address Line 2') }}
 				{{ Form::text('address_line_2',$recipient['address_line_2']) }}
 			</div>
 
@@ -57,5 +56,7 @@
 			{{ Form::submit('Save'); }}
 
 		{{ Form::close() }}
-	
+
+	</div>	
+		
 @stop

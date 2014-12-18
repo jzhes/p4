@@ -10,13 +10,13 @@
 
 @section('content')
 
-		<h2>Edit a Gift</h2>
+	<div class="mainContent">
+
+		<h2>Edit:  {{{ $gift['item'] }}} </h2>
 		
 		@foreach($errors->all() as $message)
 			<div class='error'>{{ $message }}</div>
 		@endforeach
-
-		<h2>{{{ $gift['item'] }}}</h2>
 
 		{{---- EDIT -----}}
 		{{ Form::open(array('url' => '/gift/edit')) }}
@@ -26,7 +26,7 @@
 			<div class='form-group'>
 				{{ Form::label('recipient_id', 'Recipient') }}
 				{{ Form::select('recipient_id', $recipients, $gift->recipient_id); }}
-			<div class='form-group'>
+			</div>
 
 			<div class='form-group'>
 				{{ Form::label('qty','Quantity') }}
@@ -46,5 +46,7 @@
 			{{ Form::submit('Save'); }}
 
 		{{ Form::close() }}
+
+	</div>
 
 @stop

@@ -1,4 +1,3 @@
-/* Main Styling (backgrounds, fonts, etc) */
 
 a {
 	text-decoration: none;
@@ -26,11 +25,25 @@ body {
 	border-radius: 10px;
 }
 
-/*
 .content {
-	text-align: center;
+	width: 700px;
+	margin: auto;
 }
-*/
+
+.mainContent {
+	width: 275px;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.form-group {
+	padding-top: 10px;
+}
+
+.pswd {
+	color: red;
+}
 
 th {
 	padding-bottom: 30px;
@@ -41,17 +54,37 @@ h1 {
 	display: inline;
 	vertical-align: middle;
 	font-size: 3em;
-	color: skyblue;
 	color: rgb(219, 42, 82);
 }
 
-h2 {
+h2  {
 	font-size: 1.5em;
 	color: rgb(108, 80, 80);
+	text-align: center;
+}
+
+.header {
+	font-size: 3em;
+	color: rgb(219, 42, 82);
+	font-size: 3em;
+}
+
+.subhead, .header {
+	text-align: center;
+	padding-top: 30px;
 }
 
 .description {
 	padding-top: 40px;
+	line-height: 2.0em;
+	width: 600px;
+	font-size: 1.1em;
+	color: rgb(108, 80, 80);
+}
+
+.total {
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 .headimg {
@@ -60,8 +93,14 @@ h2 {
 	clear: both;
 }
 
-.flash_message {
+.flash-message, .error {
 	font-weight: bold;
+	color: red;
+}
+
+.flash-message {
+	font-size: 1.2em;
+	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
@@ -82,7 +121,6 @@ td {
 	float: right;
 }
 
-/* Site Navigation only:  */
 #sitenav {
 	padding-top: 30px;
 	padding-bottom: 10px;
