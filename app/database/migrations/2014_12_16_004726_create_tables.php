@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration {
+class CreateTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -82,5 +82,4 @@ class CreateUsersTable extends Migration {
 		Schema::drop('recipients');
 		Schema::drop('gifts');
 	}
-
 }
