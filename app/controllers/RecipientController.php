@@ -1,11 +1,12 @@
 <?php
 
-class RecipientController extends \BaseController {
+class RecipientController extends BaseController {
 
 	/**
 	*
 	*/
 	public function __construct() {
+	
 
 		# Make sure BaseController construct gets called
 		parent::__construct();
@@ -79,7 +80,7 @@ class RecipientController extends \BaseController {
 				->withErrors($validator);
 		}
 	
-		$recipient = new recipient();
+		$recipient = new Recipient();
 
 		$recipient->fill(Input::all());
 
