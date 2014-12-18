@@ -22,30 +22,8 @@ class CreateUsersTable extends Migration {
 		    $table->timestamps();
 
 		});
-	}
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('users');
-	}
-
-}
-
-class CreateRecipientsTable extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-			Schema::create('recipients', function($table) {
+		Schema::create('recipients', function($table) {
 			
 			# AI, PK
 			$table->increments('id');
@@ -67,30 +45,7 @@ class CreateRecipientsTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users');
 
 		});
-	}
 
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-			Schema::drop('recipients');
-	}
-
-}
-
-class CreateGiftsTable extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
 		Schema::create('gifts', function($table) {
 
 			# AI, PK
@@ -113,7 +68,7 @@ class CreateGiftsTable extends Migration {
 			$table->foreign('recipient_id')->references('id')->on('recipients');
 
 		});
-		
+
 	}
 
 	/**
@@ -123,6 +78,8 @@ class CreateGiftsTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::drop('users');
+		Schema::drop('recipients');
 		Schema::drop('gifts');
 	}
 
