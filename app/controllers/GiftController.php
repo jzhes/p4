@@ -161,7 +161,7 @@ class GiftController extends \BaseController {
 		}
 
 		return Redirect::to('/gift/' . $gift->id . '}')
-			->with('flash_message', 'Your gift has been updated.');
+			->with('flash_message', 'Your gift has been added.');
 	
 
 	}

@@ -66,5 +66,4 @@ class Recipient extends Eloquent {
 
 	}
 	
-}	
-	
+}
